@@ -29,6 +29,10 @@ GitHub Pages tarda un minuto o dos en reflejar el cambio.
 
 ## Notas
 
+- Para republicar la versión de Claude Artifacts hay que publicar `source.html`,
+  nunca `index.html`: el envoltorio de Artifacts agrega su propio `<head>` y el
+  archivo generado quedaría con el esqueleto duplicado.
+
 - La página lleva `noindex, nofollow`: el link funciona para quien lo tenga,
   pero no aparece en los buscadores. Se saca desde `build.py` si en algún
   momento se quiere lo contrario.

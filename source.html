@@ -1,0 +1,704 @@
+<title>Fernando Fariña</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
+
+<style>
+  :root {
+    --ground:     #ECEEF2;
+    --surface:    #F5F6F9;
+    --surface-2:  #E0E3EA;
+    --ink:        #15181D;
+    --ink-2:      #474E5B;
+    --ink-3:      #767D8A;
+    --hairline:   #D0D4DD;
+    --hairline-2: #BCC2CD;
+    --accent:     #1F3D63;
+    --accent-soft:#4A6D96;
+    --scan:       rgba(31, 61, 99, 0.32);
+    --grid:       rgba(31, 61, 99, 0.17);
+
+    --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+
+    --measure: 63ch;
+    --pad: clamp(1.25rem, 5vw, 3.5rem);
+    --col: 8.5rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:     #101317;
+      --surface:    #171B21;
+      --surface-2:  #1F242B;
+      --ink:        #E4E7ED;
+      --ink-2:      #9AA2B0;
+      --ink-3:      #6F7784;
+      --hairline:   #262B33;
+      --hairline-2: #353B45;
+      --accent:     #93B7E0;
+      --accent-soft:#6C8CB5;
+      --scan:       rgba(147, 183, 224, 0.36);
+      --grid:       rgba(147, 183, 224, 0.16);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:     #101317;
+    --surface:    #171B21;
+    --surface-2:  #1F242B;
+    --ink:        #E4E7ED;
+    --ink-2:      #9AA2B0;
+    --ink-3:      #6F7784;
+    --hairline:   #262B33;
+    --hairline-2: #353B45;
+    --accent:     #93B7E0;
+    --accent-soft:#6C8CB5;
+    --scan:       rgba(147, 183, 224, 0.36);
+    --grid:       rgba(147, 183, 224, 0.16);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: var(--ground); }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding-inline: var(--pad);
+  }
+
+  /* ---------- sticky bar ---------- */
+
+  .bar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem var(--pad);
+    background: color-mix(in srgb, var(--ground) 86%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--hairline);
+    transform: translateY(-102%);
+    transition: transform 340ms cubic-bezier(.22,.61,.36,1);
+  }
+  .bar.show { transform: translateY(0); }
+
+  .bar__name {
+    font-family: var(--sans);
+    font-size: 0.8125rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    letter-spacing: 0.02em;
+  }
+
+  .bar__cta {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--accent);
+    border: 1px solid var(--hairline-2);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    white-space: nowrap;
+    transition: border-color 180ms, background-color 180ms;
+  }
+  .bar__cta:hover { border-color: var(--accent); background: var(--surface); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    position: relative;
+    min-height: min(94svh, 46rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: clamp(5rem, 14vh, 9rem) clamp(3rem, 8vh, 5rem);
+    overflow: hidden;
+  }
+
+  #scan {
+    position: absolute;
+    inset: auto 0 0 0;
+    width: 100%;
+    height: 62%;
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to top, #000 8%, rgba(0,0,0,.55) 46%, transparent 92%);
+    mask-image: linear-gradient(to top, #000 8%, rgba(0,0,0,.55) 46%, transparent 92%);
+  }
+
+  .hero > .wrap { position: relative; z-index: 1; width: 100%; }
+
+  .hero__name {
+    font-family: var(--sans);
+    font-variation-settings: "wght" 620, "wdth" 104;
+    font-size: clamp(2.9rem, 10.5vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem 1.4rem;
+    margin-top: clamp(2.75rem, 8vh, 4.5rem);
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--sans);
+    font-size: 0.78125rem;
+    font-variation-settings: "wght" 500, "wdth" 100;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .hero__meta a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    padding-bottom: 1px;
+    font-variant-numeric: tabular-nums;
+    transition: border-color 180ms;
+  }
+  .hero__meta a:hover { border-bottom-color: var(--accent); }
+
+  /* ---------- section scaffold ---------- */
+
+  .sec {
+    display: grid;
+    grid-template-columns: var(--col) minmax(0, 1fr);
+    gap: 0 clamp(1.5rem, 5vw, 4rem);
+    padding-block: clamp(3.25rem, 8vh, 5.25rem);
+    border-top: 1px solid var(--hairline);
+  }
+
+  .sec__label {
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0;
+    padding-top: 0.45rem;
+  }
+
+  .sec__body { max-width: var(--measure); }
+  .sec__body > p { margin: 0 0 1.15rem; text-wrap: pretty; }
+  .sec__body > p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 46rem) {
+    .sec { grid-template-columns: 1fr; gap: 1rem; }
+    .sec__label { padding-top: 0; }
+  }
+
+  /* ---------- intro block ---------- */
+
+  .lede {
+    font-size: clamp(1.1rem, 2.1vw, 1.3125rem);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ---------- traits ---------- */
+
+  .traits { display: grid; gap: 1.9rem; }
+
+  .trait h3 {
+    font-family: var(--sans);
+    font-size: 0.9375rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    letter-spacing: -0.005em;
+    margin: 0 0 0.4rem;
+  }
+  .trait p { margin: 0; color: var(--ink-2); }
+
+  /* ---------- timeline ---------- */
+
+  .roles { display: grid; gap: 2.6rem; }
+
+  .role { display: grid; gap: 0.55rem; }
+
+  .role__when {
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .role__head {
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .role__head span {
+    font-variation-settings: "wght" 400, "wdth" 100;
+    color: var(--ink-3);
+  }
+  .role p { margin: 0; color: var(--ink-2); }
+
+  /* ---------- tools ---------- */
+
+  .tools { display: grid; gap: 0; }
+
+  .tool {
+    display: grid;
+    grid-template-columns: 8rem 7.25rem minmax(0, 1fr);
+    gap: 0.3rem 1.5rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+  .tool:first-child { border-top: 1px solid var(--hairline); }
+
+  .tool__name {
+    font-family: var(--sans);
+    font-size: 0.9375rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+  }
+  .tool__note { color: var(--ink-2); font-size: 0.9875rem; }
+  .tool__lvl {
+    justify-self: start;
+    font-family: var(--sans);
+    font-size: 0.625rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+    border-radius: 999px;
+    padding: 0.16rem 0.55rem;
+    white-space: nowrap;
+  }
+
+
+  @media (max-width: 40rem) {
+    .tool { grid-template-columns: minmax(0, 1fr) auto; }
+    .tool__note { grid-column: 1 / -1; }
+  }
+
+  /* ---------- facts ---------- */
+
+  .facts { display: grid; gap: 1.75rem; }
+
+  .fact h3 {
+    font-family: var(--sans);
+    font-size: 0.9375rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    margin: 0 0 0.35rem;
+  }
+  .fact p { margin: 0; color: var(--ink-2); }
+  .fact p + p { margin-top: 0.15rem; }
+
+  /* ---------- close ---------- */
+
+  .close { padding-block: clamp(3.5rem, 10vh, 6.5rem) clamp(3rem, 8vh, 5rem); border-top: 1px solid var(--hairline); }
+
+  .close__line {
+    font-family: var(--serif);
+    font-size: clamp(1.35rem, 3.6vw, 2.05rem);
+    line-height: 1.38;
+    font-weight: 300;
+    margin: 0;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  .close__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-variation-settings: "wght" 600, "wdth" 100;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    color: var(--ground);
+    background: var(--accent);
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    font-variant-numeric: tabular-nums;
+    transition: transform 180ms cubic-bezier(.22,.61,.36,1), opacity 180ms;
+  }
+  .close__cta:hover { transform: translateY(-2px); opacity: 0.92; }
+  .close__cta svg { width: 1.05em; height: 1.05em; flex: none; }
+
+  .foot {
+    margin-top: clamp(3rem, 8vh, 4.5rem);
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-variation-settings: "wght" 500, "wdth" 100;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ---------- reveal ---------- */
+
+  .rv { opacity: 0; transform: translateY(12px); }
+  .rv.in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 620ms cubic-bezier(.22,.61,.36,1), transform 620ms cubic-bezier(.22,.61,.36,1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1; transform: none; }
+    .bar { transition: none; }
+    .close__cta { transition: none; }
+    * { animation-duration: 0.001ms !important; }
+  }
+
+  /* ---------- print ---------- */
+
+  @media print {
+    :root {
+      --ground: #fff; --surface: #fff; --ink: #111; --ink-2: #333;
+      --ink-3: #555; --hairline: #ccc; --hairline-2: #bbb; --accent: #1F3D63;
+    }
+    body { font-size: 10.5pt; }
+    .bar, #scan { display: none !important; }
+    .hero { min-height: auto; padding-block: 0 1.5rem; }
+    .hero__name { font-size: 30pt; }
+    .rv { opacity: 1 !important; transform: none !important; }
+    .sec, .role, .tool { break-inside: avoid; }
+    .close__cta { background: none; color: #1F3D63; border: 1px solid #1F3D63; }
+  }
+</style>
+
+<header class="bar" id="bar">
+  <span class="bar__name">Fernando Fariña</span>
+  <a class="bar__cta" href="https://wa.me/5491171627585">Escribime</a>
+</header>
+
+<section class="hero">
+  <canvas id="scan" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 class="hero__name">Fernando<br>Fariña</h1>
+    <div class="hero__meta">
+      <span>Santa Teresita</span>
+      <span>29 años</span>
+      <span>Español · Inglés</span>
+      <a href="https://wa.me/5491171627585">WhatsApp (011) 7162-7585</a>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <section class="sec rv">
+    <h2 class="sec__label">Presentación</h2>
+    <div class="sec__body">
+      <p class="lede">Mi experiencia se reparte entre tres áreas: la gestión de propiedades de alquiler temporario, la atención al público y la producción de contenido audiovisual, que es a lo que me dedico ahora.</p>
+      <p>Busco un desafío nuevo: un lugar donde aportar lo que sé, seguir aprendiendo y crecer dentro de un equipo de trabajo.</p>
+    </div>
+  </section>
+
+  <section class="sec rv">
+    <h2 class="sec__label">Qué puedo hacer</h2>
+    <div class="sec__body">
+      <div class="traits">
+        <div class="trait">
+          <h3>Producción de material audiovisual</h3>
+          <p>Filmación, edición y publicación de video para redes. Diseño de flyers y piezas gráficas.</p>
+        </div>
+        <div class="trait">
+          <h3>Atención al cliente, presencial y virtual</h3>
+          <p>Recepción y seguimiento de consultas en el lugar, por teléfono y por redes.</p>
+        </div>
+        <div class="trait">
+          <h3>Gestión de tareas</h3>
+          <p>Coordinar las soluciones a los imprevistos y las actividades que hacen falta para que un lugar funcione.</p>
+        </div>
+        <div class="trait">
+          <h3>Adaptación a sistemas tecnológicos</h3>
+          <p>Aprender y operar programas de gestión, publicación o diseño sin capacitación previa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv">
+    <h2 class="sec__label">Trayectoria</h2>
+    <div class="sec__body">
+      <div class="roles">
+
+        <article class="role">
+          <span class="role__when">2026 — Actualidad</span>
+          <h3 class="role__head">Sonia Estética <span>· Contenido y comunicación</span></h3>
+          <p>Produzco el material audiovisual del centro: filmo y edito los videos de las publicaciones y diseño las piezas gráficas de las campañas. Ya había trabajado con ellos en una etapa anterior y retomé a comienzos de este año.</p>
+        </article>
+
+        <article class="role">
+          <span class="role__when">2024 — 2026</span>
+          <h3 class="role__head">Viejo Skill <span>· Atención al público</span></h3>
+          <p>Servicio de salón en una cervecería.</p>
+        </article>
+
+        <article class="role">
+          <span class="role__when">2022 — 2024</span>
+          <h3 class="role__head">Roam to be Wild <span>· Gestión de propiedades · Playa Hermosa, Costa Rica</span></h3>
+          <p>Estuve a cargo de tres casas dentro de un mismo predio en la montaña que se alquilaban por Airbnb. Recibía a los huéspedes, les mostraba el lugar y me ocupaba de que todo funcionara: mantenimiento, arreglos, abastecimiento y cualquier imprevisto que apareciera durante la estadía.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv">
+    <h2 class="sec__label">Herramientas</h2>
+    <div class="sec__body">
+      <div class="tools">
+
+        <div class="tool">
+          <span class="tool__name">Canva</span>
+          <span class="tool__lvl">Avanzado</span>
+          <span class="tool__note">Piezas gráficas, flyers y material de campaña.</span>
+        </div>
+
+        <div class="tool">
+          <span class="tool__name">CapCut</span>
+          <span class="tool__lvl">Avanzado</span>
+          <span class="tool__note">Edición y armado de video para redes, de la filmación a la publicación.</span>
+        </div>
+
+        <div class="tool">
+          <span class="tool__name">Ableton Live</span>
+          <span class="tool__lvl">Avanzado</span>
+          <span class="tool__note">Producción y edición de audio. Formación específica en el área.</span>
+        </div>
+
+        <div class="tool">
+          <span class="tool__name">IA generativa</span>
+          <span class="tool__lvl">Uso aplicado</span>
+          <span class="tool__note">Generación y edición de imagen y video, redacción y organización de material.</span>
+        </div>
+
+        <div class="tool">
+          <span class="tool__name">Paquete Office</span>
+          <span class="tool__lvl">Básico</span>
+          <span class="tool__note">Word, Excel y PowerPoint. Planillas de seguimiento y organización de datos.</span>
+        </div>
+
+        <div class="tool">
+          <span class="tool__name">Sistemas</span>
+          <span class="tool__lvl">Autónomo</span>
+          <span class="tool__note">Instalación, configuración y resolución de los problemas técnicos del día a día.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rv">
+    <h2 class="sec__label">Formación</h2>
+    <div class="sec__body">
+      <div class="facts">
+        <div class="fact">
+          <h3>Producción musical</h3>
+          <p>Arjaus</p>
+        </div>
+        <div class="fact">
+          <h3>Bachiller técnico en Turismo</h3>
+          <p>ENET — Escuela de Educación Técnica</p>
+        </div>
+        <div class="fact">
+          <h3>Idiomas</h3>
+          <p>Español — nativo</p>
+          <p>Inglés — intermedio, conversacional</p>
+          <p>Portugués — básico</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close rv">
+    <p class="close__line">Contacto</p>
+    <a class="close__cta" href="https://wa.me/5491171627585">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+      (011) 7162-7585
+    </a>
+
+    <div class="foot">
+      <span>Fernando Fariña</span>
+      <span>Actualizado en 2026</span>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- sticky bar ---- */
+  var bar = document.getElementById("bar");
+  var onScroll = function () {
+    if (window.scrollY > 420) bar.classList.add("show");
+    else bar.classList.remove("show");
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---- reveal on scroll ---- */
+  var items = document.querySelectorAll(".rv");
+  if (reduce || !("IntersectionObserver" in window)) {
+    items.forEach(function (el) { el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.06 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---- perspective scan grid ---- */
+  var cv = document.getElementById("scan");
+  var ctx = cv.getContext("2d");
+  var w = 0, h = 0, start = 0, raf = 0;
+
+  function tokens() {
+    var cs = getComputedStyle(document.documentElement);
+    return {
+      grid: cs.getPropertyValue("--grid").trim() || "rgba(0,0,0,.14)",
+      scan: cs.getPropertyValue("--scan").trim() || "rgba(0,0,0,.3)"
+    };
+  }
+
+  function size() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var r = cv.getBoundingClientRect();
+    w = Math.max(1, Math.round(r.width));
+    h = Math.max(1, Math.round(r.height));
+    cv.width = w * dpr;
+    cv.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function paint(p) {
+    var t = tokens();
+    var horizon = h * 0.06;
+    var vpx = w * 0.5;
+    var floor = h - horizon;
+    var revealY = h - (h - horizon) * p;
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, revealY, w, h - revealY);
+    ctx.clip();
+
+    ctx.strokeStyle = t.grid;
+    ctx.lineWidth = 1;
+
+    /* converging verticals */
+    var n = 15;
+    for (var i = -n; i <= n; i++) {
+      var xb = vpx + i * (w / 7);
+      ctx.beginPath();
+      ctx.moveTo(vpx + i * 2.5, horizon);
+      ctx.lineTo(xb, h);
+      ctx.stroke();
+    }
+
+    /* compressed horizontals */
+    var k = 17;
+    for (var j = 1; j <= k; j++) {
+      var y = horizon + floor * Math.pow(j / k, 2.35);
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(w, y);
+      ctx.stroke();
+    }
+
+    ctx.restore();
+
+    /* scan line */
+    if (p > 0.001 && p < 0.999) {
+      var g = ctx.createLinearGradient(0, 0, w, 0);
+      g.addColorStop(0, "transparent");
+      g.addColorStop(0.5, t.scan);
+      g.addColorStop(1, "transparent");
+      ctx.strokeStyle = g;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, revealY);
+      ctx.lineTo(w, revealY);
+      ctx.stroke();
+    }
+  }
+
+  function frame(now) {
+    if (!start) start = now;
+    var d = Math.min((now - start) / 2100, 1);
+    var eased = 1 - Math.pow(1 - d, 3);
+    paint(eased);
+    if (d < 1) raf = requestAnimationFrame(frame);
+  }
+
+  function run() {
+    size();
+    cancelAnimationFrame(raf);
+    if (reduce) { paint(1); return; }
+    start = 0;
+    raf = requestAnimationFrame(frame);
+  }
+
+  var rt;
+  window.addEventListener("resize", function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () { size(); paint(1); }, 140);
+  });
+
+  /* redraw when the theme flips */
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { size(); paint(1); });
+  new MutationObserver(function () { size(); paint(1); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+  else run();
+})();
+</script>

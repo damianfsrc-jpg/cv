@@ -407,15 +407,46 @@
 
   /* ---------- reveal ---------- */
 
-  .rv { opacity: 0; transform: translateY(12px); }
-  .rv.in {
-    opacity: 1;
-    transform: none;
-    transition: opacity 620ms cubic-bezier(.22,.61,.36,1), transform 620ms cubic-bezier(.22,.61,.36,1);
+  /* Cada elemento .rise entra por su cuenta; el escalonado lo fija el JS
+     con la variable --rise-d según el orden dentro de cada sección. */
+  .rise {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 640ms cubic-bezier(.22,.61,.36,1),
+      transform 640ms cubic-bezier(.22,.61,.36,1);
+    transition-delay: var(--rise-d, 0ms);
   }
+  .rv.in .rise { opacity: 1; transform: none; }
+
+  /* Entrada del hero: cada línea del nombre sube y aparece, después la meta. */
+  .hero__name .hl { display: block; }
+  .hero__name .hl {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      opacity 860ms cubic-bezier(.19,.9,.28,1),
+      transform 860ms cubic-bezier(.19,.9,.28,1);
+  }
+  .hero__name .hl:nth-child(2) { transition-delay: 110ms; }
+  .hero.ready .hero__name .hl { opacity: 1; transform: none; }
+
+  .hero__meta {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 820ms ease, transform 820ms ease;
+    transition-delay: 640ms;
+  }
+  .hero.ready .hero__meta { opacity: 1; transform: none; }
 
   @media (prefers-reduced-motion: reduce) {
-    .rv { opacity: 1; transform: none; }
+    .rise,
+    .hero__name .hl,
+    .hero__meta {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
     .bar { transition: none; }
     .close__cta { transition: none; }
     * { animation-duration: 0.001ms !important; }
@@ -432,7 +463,7 @@
     .bar, #scan { display: none !important; }
     .hero { min-height: auto; padding-block: 0 1.5rem; }
     .hero__name { font-size: 30pt; }
-    .rv { opacity: 1 !important; transform: none !important; }
+    .rise, .hero__name .hl, .hero__meta { opacity: 1 !important; transform: none !important; }
     .sec, .role, .tool { break-inside: avoid; }
     .close__cta { background: none; color: #1F3D63; border: 1px solid #1F3D63; }
   }
@@ -447,7 +478,7 @@
 <section class="hero">
   <canvas id="scan" aria-hidden="true"></canvas>
   <div class="wrap">
-    <h1 class="hero__name">Fernando<br>Fariña</h1>
+    <h1 class="hero__name"><span class="hl">Fernando</span><span class="hl">Fariña</span></h1>
     <div class="hero__meta">
       <span>Santa Teresita</span>
       <span>29 años</span>
@@ -460,30 +491,30 @@
 <main class="wrap">
 
   <section class="sec rv">
-    <h2 class="sec__label">Presentación</h2>
+    <h2 class="sec__label rise">Presentación</h2>
     <div class="sec__body">
-      <p class="lede">Mi trayectoria se reparte entre tres áreas: la atención al público, la producción de contenido audiovisual —a lo que me dedico ahora— y la gestión de propiedades de alquiler temporario, donde tengo experiencia reciente.</p>
-      <p>Busco un desafío nuevo: un lugar donde aportar lo que sé, seguir aprendiendo y crecer dentro de un equipo de trabajo.</p>
+      <p class="lede rise">Mi trayectoria se reparte entre tres áreas: la atención al público, la producción de contenido audiovisual —a lo que me dedico ahora— y la gestión de propiedades de alquiler temporario, donde tengo experiencia reciente.</p>
+      <p class="rise">Busco un desafío nuevo: un lugar donde aportar lo que sé, seguir aprendiendo y crecer dentro de un equipo de trabajo.</p>
     </div>
   </section>
 
   <section class="sec rv">
-    <h2 class="sec__label">Qué puedo hacer</h2>
+    <h2 class="sec__label rise">Qué puedo hacer</h2>
     <div class="sec__body">
       <div class="traits">
-        <div class="trait">
+        <div class="trait rise">
           <h3>Producción de material audiovisual</h3>
           <p>Filmación, edición y publicación de video para redes. Diseño de flyers y piezas gráficas.</p>
         </div>
-        <div class="trait">
+        <div class="trait rise">
           <h3>Atención al cliente, presencial y virtual</h3>
           <p>Recepción y seguimiento de consultas en el lugar, por teléfono y por redes.</p>
         </div>
-        <div class="trait">
+        <div class="trait rise">
           <h3>Gestión de tareas</h3>
           <p>Resolución de imprevistos y coordinación de las tareas necesarias para que un lugar funcione.</p>
         </div>
-        <div class="trait">
+        <div class="trait rise">
           <h3>Adaptación a sistemas tecnológicos</h3>
           <p>Manejo de programas de gestión, publicación o diseño.</p>
         </div>
@@ -492,23 +523,23 @@
   </section>
 
   <section class="sec rv">
-    <h2 class="sec__label">Trayectoria</h2>
+    <h2 class="sec__label rise">Trayectoria</h2>
     <div class="sec__body">
       <div class="roles">
 
-        <article class="role">
+        <article class="role rise">
           <span class="role__when">2026 — Actualidad</span>
           <h3 class="role__head">Sonia Estética <span>· Contenido y comunicación</span></h3>
           <p>Produzco el material audiovisual del centro: filmo y edito los videos de las publicaciones y diseño las piezas gráficas de las campañas. Ya había trabajado con ellos en una etapa anterior y retomé a comienzos de este año.</p>
         </article>
 
-        <article class="role">
+        <article class="role rise">
           <span class="role__when">2024 — 2026</span>
           <h3 class="role__head">Viejo Skill <span>· Atención al público · Santa Teresita</span></h3>
           <p>Servicio de atención al público en salón.</p>
         </article>
 
-        <article class="role">
+        <article class="role rise">
           <span class="role__when">2022 — 2024</span>
           <h3 class="role__head">Roam to be Wild <span>· Gestión de propiedades · Playa Hermosa, Costa Rica</span></h3>
           <p>Estuve a cargo de tres casas dentro de un mismo predio en la montaña que se alquilaban por Airbnb. Recibía a los huéspedes, les mostraba el lugar y me ocupaba de que todo funcionara: mantenimiento, arreglos, abastecimiento y cualquier imprevisto que apareciera durante la estadía.</p>
@@ -519,41 +550,41 @@
   </section>
 
   <section class="sec rv">
-    <h2 class="sec__label">Herramientas</h2>
+    <h2 class="sec__label rise">Herramientas</h2>
     <div class="sec__body">
       <div class="tools">
 
-        <div class="tool">
+        <div class="tool rise">
           <span class="tool__name">Canva</span>
           <span class="tool__lvl">Avanzado</span>
           <span class="tool__note">Piezas gráficas, flyers y material de campaña.</span>
         </div>
 
-        <div class="tool">
+        <div class="tool rise">
           <span class="tool__name">CapCut</span>
           <span class="tool__lvl">Avanzado</span>
           <span class="tool__note">Edición y armado de video para redes.</span>
         </div>
 
-        <div class="tool">
+        <div class="tool rise">
           <span class="tool__name">Ableton Live</span>
           <span class="tool__lvl">Avanzado</span>
           <span class="tool__note">Producción y edición de audio. Formación específica en el área.</span>
         </div>
 
-        <div class="tool">
+        <div class="tool rise">
           <span class="tool__name">IA generativa</span>
           <span class="tool__lvl">Uso aplicado</span>
           <span class="tool__note">Creación de contenido con criterio visual, para que el resultado se vea orgánico.</span>
         </div>
 
-        <div class="tool">
+        <div class="tool rise">
           <span class="tool__name">Paquete Office</span>
           <span class="tool__lvl">Básico</span>
           <span class="tool__note">Word, Excel y PowerPoint.</span>
         </div>
 
-        <div class="tool">
+        <div class="tool rise">
           <span class="tool__name">Sistemas</span>
           <span class="tool__lvl">Autónomo</span>
           <span class="tool__note">Instalación, configuración y resolución de problemas técnicos del día a día.</span>
@@ -564,22 +595,22 @@
   </section>
 
   <section class="sec rv">
-    <h2 class="sec__label">Formación</h2>
+    <h2 class="sec__label rise">Formación</h2>
     <div class="sec__body">
       <div class="facts">
-        <div class="fact">
+        <div class="fact rise">
           <h3>Marketing para redes sociales</h3>
           <p>Domestika</p>
         </div>
-        <div class="fact">
+        <div class="fact rise">
           <h3>Producción musical</h3>
           <p>Arjaus — Ciudad de Buenos Aires</p>
         </div>
-        <div class="fact">
+        <div class="fact rise">
           <h3>Bachiller técnico en Turismo</h3>
           <p>ENET — Escuela de Educación Secundaria Técnica, Santa Teresita</p>
         </div>
-        <div class="fact">
+        <div class="fact rise">
           <h3>Idiomas</h3>
           <p>Español — nativo</p>
           <p>Inglés — intermedio, conversacional</p>
@@ -590,7 +621,7 @@
   </section>
 
   <section class="close rv">
-    <p class="close__line">Contacto</p>
+    <p class="close__line rise">Contacto</p>
     <a class="close__cta" href="https://wa.me/5491171627585">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 0 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
       (011) 7162-7585
@@ -624,7 +655,13 @@
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+        if (!e.isIntersecting) return;
+        var rises = e.target.querySelectorAll(".rise");
+        for (var i = 0; i < rises.length; i++) {
+          rises[i].style.setProperty("--rise-d", (i * 70) + "ms");
+        }
+        e.target.classList.add("in");
+        io.unobserve(e.target);
       });
     }, { rootMargin: "0px 0px -12% 0px", threshold: 0.06 });
     items.forEach(function (el) { io.observe(el); });
@@ -715,6 +752,8 @@
   }
 
   function run() {
+    var hero = document.querySelector(".hero");
+    if (hero) hero.classList.add("ready");
     size();
     cancelAnimationFrame(raf);
     if (reduce) { paint(1); return; }

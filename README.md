@@ -4,6 +4,8 @@ Currículum en formato de página web, publicado con GitHub Pages.
 
 **https://damianfsrc-jpg.github.io/cv/**
 
+Versión con más movimiento: **https://damianfsrc-jpg.github.io/cv/variante.html**
+
 ## Archivos
 
 | Archivo | Para qué sirve |
@@ -11,6 +13,7 @@ Currículum en formato de página web, publicado con GitHub Pages.
 | `source.html` | La fuente. Acá se editan textos, colores y estructura. |
 | `index.html` | **Generado.** Es lo que sirve GitHub Pages. No editarlo a mano. |
 | `build.py` | Genera `index.html` a partir de `source.html`. |
+| `variante.html` | Segunda versión con más movimiento. Archivo completo e independiente: se edita a mano, no pasa por `build.py`. |
 
 `source.html` está escrito para el envoltorio de Claude Artifacts, así que no
 lleva `<!doctype>`, `<head>` ni `<body>`. `build.py` agrega ese esqueleto junto
